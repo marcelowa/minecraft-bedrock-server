@@ -1,13 +1,20 @@
 # Minecreft Bedrock Server
 
+## Volume
+the bedrock volume supports the following files and folders:  
+  
+server.properties   
+whitelist.json  
+permissions.json  
+worlds  
+
 ## Run
 ```shell
-docker run -d --name=minecraft-bedrock-server \
-    -e API_KEY=your_api_key_on_cloudflare \
-    -e EMAIL=youremail@example.com \
-    -e ZONE=example.com \
-    -e HOST=foo.example.com \
-    marcelowa/minecraft-bedrock-server:latest
+docker run -d \
+  --name=minecraft-bedrock-server \
+  -p 19132:19132/udp \
+  -v ~/bedrock-data:/bedrock \
+  marcelowa/minecraft-bedrock-server:latest
 ```
 
 ## Pull

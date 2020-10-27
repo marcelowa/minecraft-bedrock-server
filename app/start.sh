@@ -7,17 +7,30 @@ cd server
 unzip ../bedrock_server.zip
 rm ../bedrock_server.zip
 
-if [ -f "/config/server.properties" ]; then
-    echo "Found custom server.properties"
-    cp /config/server.properties .
+if [ ! -f "/bedrock/server.properties" ]; then
+    cp server.properties /bedrock/.
 fi
-if [ -f "/config/whitelist.json" ]; then
-    echo "Found whitelist.json"
-    cp /config/whitelist.json .
+
+if [ ! -f "/bedrock/whitelist.json" ]; then
+    echo "[]" > /bedrock/whitelist.json
 fi
-if [ -f "/config/permissions.json" ]; then
-    echo "Found permissions.json"
-    cp /config/whitelist.json .
+
+if [ ! -f "/bedrock/permissions.json" ]; then
+    echo "[]" > /bedrock/permissions.json
 fi
+
+if [ ! -d "/bedrock/worlds" ]; then
+  mkdir -p /bedrock/worlds  
+fi
+
+rm -rf worlds
+rm -f server.properties
+rm -f whitelist.json
+rm -f permissions.json
+
+ln -s /bedrock/worlds .
+ln -s /bedrock/server.properties .
+ln -s /bedrock/whitelist.json .
+ln -s /bedrock/permissions.json .
 
 ./bedrock_server
